@@ -1,0 +1,5 @@
+api:
+  jph:
+    domain: "jsonplaceholder.typicode.com"
+    endpoints:
+      user: "/users"
