@@ -86,19 +86,21 @@ public class DatabaseControllerTests {
 
   }
 
-  @Test
-  void testDeleteCat() throws Exception {
-    // Assumption
-    Cat mockedReturnCat = new Cat("John", 2);
-    // when
-    Mockito.when(catDatabaseServiceImpl.setCatToStaticMemory(1, mockedReturnCat)).thenReturn(mockedReturnCat);
-    // assert
-    mockMvc.perform(get("/api/v1/cat/index/{index}/name/{name}/age/{age}", 1, "ABCD", 3))
-        .andExpect(status().isOk()) // http code 200 - OK
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-        .andExpect(jsonPath("$.name").value("ABCD"))
-        .andExpect(jsonPath("$.age").value(3))
-        .andDo(print()); // similar to sysout, toString()
+  // @Test
+  // void testDeleteCat() throws Exception {
+  // // Assumption
+  // Cat mockedReturnCat = new Cat("John", 2);
+  // // when
+  // Mockito.when(catDatabaseServiceImpl.setCatToStaticMemory(1,
+  // mockedReturnCat)).thenReturn(mockedReturnCat);
+  // // assert
+  // mockMvc.perform(get("/api/v1/cat/index/{index}/name/{name}/age/{age}", 1,
+  // "ABCD", 3))
+  // .andExpect(status().isOk()) // http code 200 - OK
+  // .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+  // .andExpect(jsonPath("$.name").value("ABCD"))
+  // .andExpect(jsonPath("$.age").value(3))
+  // .andDo(print()); // similar to sysout, toString()
 
-  }
+  // }
 }

@@ -1,10 +1,8 @@
 package com.vtxlab.bootcamp.demosbfakedatabase.Service.impl;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import com.vtxlab.bootcamp.demosbfakedatabase.database.CatDatabase;
 import com.vtxlab.bootcamp.demosbfakedatabase.model.Cat;
 import com.vtxlab.bootcamp.demosbfakedatabase.Service.CatDatabaseService;
