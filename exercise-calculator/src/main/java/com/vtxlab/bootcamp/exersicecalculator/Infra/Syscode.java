@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum Syscode {
 
   OK("200", "OK"),
-  INVALID_INPUT("09", "Invalid Input.");
+  INVALID_INPUT("9", "Invalid Input.");
 
   private String code;
   private String message;
