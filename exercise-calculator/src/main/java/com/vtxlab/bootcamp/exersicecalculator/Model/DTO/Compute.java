@@ -15,5 +15,4 @@ public class Compute {
 
   private String result;
 
-
 }

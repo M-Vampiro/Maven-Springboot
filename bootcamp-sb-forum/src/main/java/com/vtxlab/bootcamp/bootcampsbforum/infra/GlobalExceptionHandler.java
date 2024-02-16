@@ -1,28 +1,13 @@
-package com.vtxlab.bootcamp.bootcampsbforum.exception;
+package com.vtxlab.bootcamp.bootcampsbforum.infra;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.RestClientException;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.ApiResponse;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.JPHClientException;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.ResourceNotFound;
-import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
 
 @RestControllerAdvice // Bean: @ContollerAdvice + @ResponseBody
 public class GlobalExceptionHandler {
-
-  @ExceptionHandler(JPHClientException.class) // catch
-  @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT) // http status 408
-  // @ResponseStatus is an alternative of ResponseEntity<>
-  public ApiResponse<Void> jphClientExceptionHandler(JPHClientException e) {
-    return ApiResponse.<Void>builder() //
-        .code(e.getCode()) //
-        .message(e.getMessage()) //
-        .data(null) //
-        .build();
-  }
 
   @ExceptionHandler(RestClientException.class) // catch
   @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT) // TBC.

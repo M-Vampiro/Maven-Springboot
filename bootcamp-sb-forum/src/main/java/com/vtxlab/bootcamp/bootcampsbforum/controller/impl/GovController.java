@@ -18,7 +18,7 @@ import com.vtxlab.bootcamp.bootcampsbforum.service.GovService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.PostService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
 
-@RestController
+@RestController // Bean
 @RequestMapping(value = "/gov/api/v1")
 public class GovController implements GovOperation {
 

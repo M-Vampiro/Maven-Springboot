@@ -8,7 +8,6 @@ import com.vtxlab.bootcamp.exersicecalculator.Controller.CalculatorOperation;
 import com.vtxlab.bootcamp.exersicecalculator.Model.DTO.Compute;
 import com.vtxlab.bootcamp.exersicecalculator.Service.Impl.ServiceImpl;
 
-
 @RestController
 @RequestMapping(value = "/api/v1")
 public class CalController implements CalculatorOperation {

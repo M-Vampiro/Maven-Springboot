@@ -8,17 +8,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vtxlab.bootcamp.exersicecalculator.Model.DTO.Compute;
 
-
-
 public interface CalculatorOperation {
 
   @GetMapping(value = "/calculate/{x}/{y}/{operation}")
   Compute calculate(@PathVariable String x, @PathVariable String y, @PathVariable String operation) throws Exception;
-  
+
   @PostMapping(value = "/calculate")
   Compute calculate2(@RequestBody Compute compute) throws Exception;
 
   @GetMapping(value = "/calculate")
-  Compute calculate3(@RequestParam(name = "x") String x, @RequestParam(name = "y") String y, @RequestParam(name = "operation") String operation) throws Exception;
-  
+  Compute calculate3(@RequestParam(name = "x") String x, @RequestParam(name = "y") String y,
+      @RequestParam(name = "operation") String operation) throws Exception;
+
 }

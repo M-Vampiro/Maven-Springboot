@@ -13,7 +13,7 @@ import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 
 // When server starts,
 // Spring ensures modelMapper is ready before creating GovMapper object
-@Component
+@Component // -> Bean
 public class GovMapper {
 
   @Autowired

@@ -4,7 +4,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -20,7 +19,7 @@ public class UserPostDTO {
   private String phone;
 
   @Setter
-  @JsonProperty(value = "posts")
+  @JsonProperty(value = "posts") // serialization
   private List<PostDTO> postDTOs;
 
 }

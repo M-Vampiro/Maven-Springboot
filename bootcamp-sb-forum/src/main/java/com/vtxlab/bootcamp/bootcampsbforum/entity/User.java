@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Users")
@@ -18,7 +19,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Setter
 public class User implements Serializable {
+
+  private static final long serialVersionUID = 3L;
 
   @Id // PK
   @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-generated

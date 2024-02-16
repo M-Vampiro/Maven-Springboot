@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public enum Syscode {
 
-  OK("200", "OK"),
   INVALID_INPUT("9", "Invalid Input.");
 
   private String code;
@@ -15,5 +14,5 @@ public enum Syscode {
     this.code = code;
     this.message = message;
   }
-  
+
 }
