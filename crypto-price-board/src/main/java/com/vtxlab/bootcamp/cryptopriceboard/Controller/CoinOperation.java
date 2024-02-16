@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.vtxlab.bootcamp.cryptopriceboard.Infra.ApiResponce;
-import com.vtxlab.bootcamp.cryptopriceboard.Infra.Currency;
 import com.vtxlab.bootcamp.cryptopriceboard.Model.Coin;
 
 public interface CoinOperation {
@@ -18,9 +17,9 @@ public interface CoinOperation {
 
   @GetMapping(value = "/markets")
   @ResponseStatus(value = HttpStatus.OK)
-  ApiResponce<List<Coin>> getAllCoins(@RequestParam(name = "currency",required = true) String currency);
+  ApiResponce<List<Coin>> getAllCoins(@RequestParam(name = "currency",required = true) String currency) throws Exception;
 
   @GetMapping(value = "/coins")
   @ResponseStatus(value = HttpStatus.OK)
-  ApiResponce<Coin> getCoin(@RequestParam(name = "currency",required = true) String currency, @RequestParam(name = "ids", required = false) String ids);
+  ApiResponce<Coin> getCoin(@RequestParam(name = "currency",required = true) String currency, @RequestParam(name = "ids", required = false) String ids) throws Exception;
 }

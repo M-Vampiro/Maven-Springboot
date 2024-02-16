@@ -21,7 +21,7 @@ public class CoinController implements CoinOperation {
   private CoinService coinService;
 
   @Override
-  public ApiResponce<List<Coin>> getAllCoins(String currency) {
+  public ApiResponce<List<Coin>> getAllCoins(String currency) throws Exception{
     return ApiResponce.<List<Coin>>builder()
         .code(Syscode.OK.getCode())
         .message(Syscode.OK.getMessage())
@@ -30,7 +30,7 @@ public class CoinController implements CoinOperation {
   }
 
   @Override
-  public ApiResponce<Coin> getCoin(String currency, String ids) {
+  public ApiResponce<Coin> getCoin(String currency, String ids) throws Exception{
     List<Coin> result = coinService.getAllCoins(currency).stream()
     .collect(Collectors.toList());
 

@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum Syscode {
   OK("000000", "OK."),
-  NotFound("100000", "Not Found.");
+  NotFound("100000", "Not Found."),
+  RCException("900000", "RestClientException - Coingecto Service is unavailable");
 
   private String code;
 

@@ -25,9 +25,9 @@ public class Coin {
 
   private long total_volume;
 
-  private int high_24h;
+  private double high_24h;
 
-  private int low_24h;
+  private double low_24h;
 
   private double price_change_24h;
 
@@ -37,13 +37,13 @@ public class Coin {
 
   private double market_cap_change_percentage_24h;
 
-  private int circulating_supply;
+  private double circulating_supply;
 
-  private int total_supply;
+  private double total_supply;
 
-  private int max_supply;
+  private long max_supply;
 
-  private int ath;
+  private double ath;
 
   private double ath_change_percentage;
 

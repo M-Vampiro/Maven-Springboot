@@ -6,6 +6,6 @@ import com.vtxlab.bootcamp.cryptopriceboard.Model.Coin;
 
 public interface CoinService {
 
-  List<Coin> getAllCoins(String currency);
+  List<Coin> getAllCoins(String currency) throws Exception;
 
 }
