@@ -3,7 +3,6 @@ package com.vtxlab.bootcamp.bootcampsbforum.service;
 import java.util.List;
 import org.springframework.data.domain.Sort;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
-import jakarta.transaction.Transactional;
 
 public interface UserService {
 
