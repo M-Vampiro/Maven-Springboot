@@ -28,8 +28,9 @@ public class CoinController implements CoinOperation {
         : coinService.getAllCoins(currency).stream()
             .filter(e -> ids.contains(e.getId()))
             .collect(Collectors.toList());
-    if (result.size() == 0 || result.size() != ids.split(",").length)
-      throw new RestClientException(Syscode.RCException.getMessage());
+    if (ids != null)
+      if (result.size() == 0 || result.size() != ids.split(",").length)
+        throw new RestClientException(Syscode.RCException.getMessage());
     return ApiResponce.<List<Coin>>builder()
         .code(Syscode.OK.getCode())
         .message(Syscode.OK.getMessage())
