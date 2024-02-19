@@ -17,8 +17,6 @@ import com.vtxlab.bootcamp.cryptopriceboard.Infra.Syscode;
 import com.vtxlab.bootcamp.cryptopriceboard.Model.Coin;
 import com.vtxlab.bootcamp.cryptopriceboard.Service.CoinService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 public class CoinJsonPlaceHolder implements CoinService {
 
@@ -45,6 +43,7 @@ public class CoinJsonPlaceHolder implements CoinService {
     }
     if (marketUrl == null)
       throw new RestClientException(Syscode.RCException.getMessage());
+
     Coin[] coins = restTemplate.getForObject(marketUrl, Coin[].class);
 
     return Arrays.stream(coins)

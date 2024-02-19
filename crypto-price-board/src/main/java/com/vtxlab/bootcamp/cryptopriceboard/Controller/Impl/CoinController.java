@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 
 import com.vtxlab.bootcamp.cryptopriceboard.Controller.CoinOperation;
 import com.vtxlab.bootcamp.cryptopriceboard.Infra.ApiResponce;
@@ -21,24 +22,34 @@ public class CoinController implements CoinOperation {
   private CoinService coinService;
 
   @Override
-  public ApiResponce<List<Coin>> getAllCoins(String currency) throws Exception{
+  public ApiResponce<List<Coin>> getAllCoins(String currency, String ids) throws Exception {
+
+    List<Coin> result = ids == null ? coinService.getAllCoins(currency)
+        : coinService.getAllCoins(currency).stream()
+            .filter(e -> ids.contains(e.getId()))
+            .collect(Collectors.toList());
+    if (result.size() == 0 || result.size() != ids.split(",").length)
+      throw new RestClientException(Syscode.RCException.getMessage());
     return ApiResponce.<List<Coin>>builder()
         .code(Syscode.OK.getCode())
         .message(Syscode.OK.getMessage())
-        .data(coinService.getAllCoins(currency))
+        .data(result)
         .build();
+
+    // Ver 1.0
+    // return ids == null ? ApiResponce.<List<Coin>>builder()
+    // .code(Syscode.OK.getCode())
+    // .message(Syscode.OK.getMessage())
+    // .data(coinService.getAllCoins(currency))
+    // .build()
+    // : ApiResponce.<List<Coin>>builder()
+    // .code(Syscode.OK.getCode())
+    // .message(Syscode.OK.getMessage())
+    // .data(
+    // coinService.getAllCoins(currency).stream()
+    // .filter(e -> ids.contains(e.getId()))
+    // .collect(Collectors.toList()))
+    // .build();
   }
 
-  @Override
-  public ApiResponce<Coin> getCoin(String currency, String ids) throws Exception{
-    List<Coin> result = coinService.getAllCoins(currency).stream()
-    .collect(Collectors.toList());
-
-    return ApiResponce.<Coin>builder()
-    .code(Syscode.OK.getCode())
-    .message(Syscode.OK.getMessage())
-    .data(result.get(0))
-    .build();
-
-}
 }
