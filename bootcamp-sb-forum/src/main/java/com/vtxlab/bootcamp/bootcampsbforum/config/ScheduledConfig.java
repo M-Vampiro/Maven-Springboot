@@ -24,7 +24,7 @@ public class ScheduledConfig {
   }
 
   // @Scheduled(cron = "*/5 * * * * ?") // every 5 sec, similar to fixedDelay
-  @Scheduled(cron = "5 * * * * ?") // every 5 sec, similar to fixedDelay
+  // @Scheduled(cron = "5 * * * * ?") // every 5 sec, similar to fixedDelay
   @Async
   public void cronTask5() throws InterruptedException {
     System.out.println("start cronTask5");
@@ -32,7 +32,7 @@ public class ScheduledConfig {
     System.out.println("end cronTask5");
   }
 
-  @Scheduled(cron = "10 * * * * ?") // every 5 sec, similar to fixedDelay
+  // @Scheduled(cron = "10 * * * * ?") // every 5 sec, similar to fixedDelay
   @Async
   public void cronTask10() throws InterruptedException {
     System.out.println("start cronTask10");

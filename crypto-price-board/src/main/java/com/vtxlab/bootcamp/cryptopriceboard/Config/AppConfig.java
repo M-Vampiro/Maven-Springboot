@@ -1,5 +1,6 @@
 package com.vtxlab.bootcamp.cryptopriceboard.Config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -10,6 +11,11 @@ public class AppConfig {
   @Bean
   RestTemplate restTemplate() {
     return new RestTemplate();
+  }
+
+  @Bean
+  ModelMapper modelMapper() {
+    return new ModelMapper();
   }
 
 }

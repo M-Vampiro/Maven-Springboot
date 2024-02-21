@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ApiResponce<T> {
+public class ApiResponse<T> {
 
   private String code;
 

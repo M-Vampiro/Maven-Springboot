@@ -1,0 +1,8 @@
+server:
+  port: 8081
+api:
+  coingecko:
+    domain: "api.coingecko.com"
+    endpoints:
+      markets: "api/v3/coins/markets"
+    key: "CG-scZ194UER4EhL9QNjs7D61Pm"

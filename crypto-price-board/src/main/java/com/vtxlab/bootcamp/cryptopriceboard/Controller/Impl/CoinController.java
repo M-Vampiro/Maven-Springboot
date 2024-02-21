@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
 import com.vtxlab.bootcamp.cryptopriceboard.Controller.CoinOperation;
-import com.vtxlab.bootcamp.cryptopriceboard.Infra.ApiResponce;
+import com.vtxlab.bootcamp.cryptopriceboard.DTO.CoinDTO;
+import com.vtxlab.bootcamp.cryptopriceboard.Infra.ApiResponse;
 import com.vtxlab.bootcamp.cryptopriceboard.Infra.Syscode;
-import com.vtxlab.bootcamp.cryptopriceboard.Model.Coin;
+import com.vtxlab.bootcamp.cryptopriceboard.Mapper.Mapper;
 import com.vtxlab.bootcamp.cryptopriceboard.Service.CoinService;
 
 @RestController
@@ -21,17 +22,23 @@ public class CoinController implements CoinOperation {
   @Autowired
   private CoinService coinService;
 
-  @Override
-  public ApiResponce<List<Coin>> getAllCoins(String currency, String ids) throws Exception {
+  @Autowired
+  private Mapper mapper;
 
-    List<Coin> result = ids == null ? coinService.getAllCoins(currency)
+  @Override
+  public ApiResponse<List<CoinDTO>> getAllCoins(String currency, String ids) throws Exception {
+
+    List<CoinDTO> result = ids == null ? coinService.getAllCoins(currency).stream()
+        .map(e -> mapper.mapEntity(e))
+        .collect(Collectors.toList())
         : coinService.getAllCoins(currency).stream()
             .filter(e -> ids.contains(e.getId()))
+            .map(e -> mapper.mapEntity(e))
             .collect(Collectors.toList());
     if (ids != null)
       if (result.size() == 0 || result.size() != ids.split(",").length)
         throw new RestClientException(Syscode.RCException.getMessage());
-    return ApiResponce.<List<Coin>>builder()
+    return ApiResponse.<List<CoinDTO>>builder()
         .code(Syscode.OK.getCode())
         .message(Syscode.OK.getMessage())
         .data(result)
