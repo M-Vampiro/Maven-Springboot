@@ -7,18 +7,18 @@ import lombok.Setter;
 @Setter
 public class Quote {
 
-  private double c;
+  private Double c;
 
-  private double d;
+  private Double d;
 
-  private double dp;
+  private Double dp;
 
-  private double h;
+  private Double h;
 
-  private double l;
+  private Double l;
 
-  private double o;
+  private Double o;
 
-  private double pc;
+  private Double pc;
 
 }

@@ -7,10 +7,10 @@ import lombok.Getter;
 @Getter
 public class ApiResponse<T> {
 
-private String code;
+  private String code;
 
-private String message;
+  private String message;
 
-private T data;
-  
+  private T data;
+
 }

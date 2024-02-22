@@ -2,6 +2,7 @@ package com.vtxlab.bootcamp.stockpriceboard.Infra;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
+@SuppressWarnings("null")
 public class BcUtil {
 
   public static String quoteUrl(Scheme scheme, String domain, String quoteEndpoint, String symbol, String key) {
@@ -10,7 +11,7 @@ public class BcUtil {
         .host(domain)
         .path(quoteEndpoint)
         .queryParam("symbol", symbol)
-        .queryParam("key", key)
+        .queryParam("token", key)
         .toUriString();
   }
 
@@ -20,7 +21,7 @@ public class BcUtil {
         .host(domain)
         .path(profile2Endpoint)
         .queryParam("symbol", symbol)
-        .queryParam("key", key)
+        .queryParam("token", key)
         .toUriString();
   }
 

@@ -1,9 +1,5 @@
 package com.vtxlab.bootcamp.stockpriceboard.Service.Impl;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,12 +27,13 @@ public class QuoteJsonPlaceHolder implements QuoteService {
   @Autowired
   private RestTemplate restTemplate;
 
+  @SuppressWarnings("null")
   @Override
   public Quote getQuotes(String symbol) throws Exception {
     String quoteUrl = BcUtil.quoteUrl(Scheme.HTTPS, domain, quoteEndpoint, symbol.toUpperCase(), key);
 
     Quote quote = restTemplate.getForObject(quoteUrl, Quote.class);
-    if (quote == null)
+    if (quote.getD() == null || quote.getDp() == null)
       throw new RestClientException(Syscode.RCException.getMessage());
 
     return quote;

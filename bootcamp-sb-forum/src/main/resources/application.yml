@@ -7,7 +7,7 @@ api:
 
 database: 
   postgres: "db_forum"
-
+ 
 spring:
   datasource:
     driverClassName: "org.postgresql.Driver"

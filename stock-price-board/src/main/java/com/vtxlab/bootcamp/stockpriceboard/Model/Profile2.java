@@ -19,13 +19,13 @@ public class Profile2 {
 
   private String logo;
 
-  private long marketCapitalization;
+  private Long marketCapitalization;
 
   private String name;
 
   private String phone;
 
-  private double shareOutstanding;
+  private Double shareOutstanding;
 
   private String ticker;
 

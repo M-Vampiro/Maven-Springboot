@@ -13,10 +13,11 @@ public interface FinnhubOperation {
 
   @GetMapping(value = "/profile2")
   @ResponseStatus(value = HttpStatus.OK)
-  public ApiResponse<Profile2DTO> getProfile(@RequestParam(name = "symbol", required = true) String symbol);
+  public ApiResponse<Profile2DTO> getProfile(@RequestParam(name = "symbol", required = true) String symbol)
+      throws Exception;
 
   @GetMapping(value = "/quote")
   @ResponseStatus(value = HttpStatus.OK)
-  ApiResponse<QuoteDTO> getQuote(@RequestParam(name = "symbol", required = true) String symbol);
+  ApiResponse<QuoteDTO> getQuote(@RequestParam(name = "symbol", required = true) String symbol) throws Exception;
 
 }
