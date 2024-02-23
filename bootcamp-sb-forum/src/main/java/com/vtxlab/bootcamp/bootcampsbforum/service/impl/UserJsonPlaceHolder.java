@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.vtxlab.bootcamp.bootcampsbforum.dto.request.UserPostRequestDTO;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.BcUtil;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.ResourceNotFound;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Scheme;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.repository.UserRepository;
 import com.vtxlab.bootcamp.bootcampsbforum.service.UserService;
@@ -38,8 +41,11 @@ public class UserJsonPlaceHolder implements UserService {
   @PersistenceContext // similar to autowired
   private EntityManager entityManager;
 
+  @Autowired
+  private UserMapper userMapper;
+
   @Override
-  public List<User> getUsers() {
+  public List<User> getUsersFromJPH() {
     // RestTemplate restTemplate = new RestTemplate();
     String userUrl = BcUtil.url(Scheme.HTTPS, domain, userEndpoint);
     User[] users = restTemplate.getForObject(userUrl, User[].class);
@@ -49,8 +55,8 @@ public class UserJsonPlaceHolder implements UserService {
   }
 
   @Override
-  public User getUser(int index) {
-    Optional<User> userPostDTO = this.getUsers().stream() //
+  public User getUserFromJPH(int index) {
+    Optional<User> userPostDTO = this.getUsersFromJPH().stream() //
         .filter(e -> e.getId() == index) //
         .findFirst();
     if (userPostDTO.isPresent())
@@ -59,20 +65,18 @@ public class UserJsonPlaceHolder implements UserService {
   }
 
   @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> getAllByEmailOrPhone(
-      String email, String phone, Sort sort) {
+  public List<UserEntity> getAllByEmailOrPhone(String email, String phone,
+      Sort sort) {
     return userRepository.findAllByEmailOrPhone(email, phone, sort);
   }
 
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> getAllByEmailOrPhone(
-      String email, String phone) {
+  public List<UserEntity> getAllByEmailOrPhone(String email, String phone) {
     Sort sort = Sort.by("email").ascending().and(Sort.by("phone").ascending());
     return userRepository.findAllByEmailOrPhone(email, phone, sort);
   }
 
   @Override
-  public List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> getUsersByAddrLatGreaterThan(
-      Double latitude) {
+  public List<UserEntity> getUsersByAddrLatGreaterThan(Double latitude) {
     return userRepository.findAllByAddrLatGreaterThan(latitude);
   }
 
@@ -89,18 +93,16 @@ public class UserJsonPlaceHolder implements UserService {
 
   @Override
   @Transactional
-  public com.vtxlab.bootcamp.bootcampsbforum.entity.User updateUserById(
-      Long userId, com.vtxlab.bootcamp.bootcampsbforum.entity.User newUser) {
+  public UserEntity updateUserById(Long userId, UserEntity newUser) {
     // entityManager.find() -> select
-    com.vtxlab.bootcamp.bootcampsbforum.entity.User oldUser = entityManager
-        .find(com.vtxlab.bootcamp.bootcampsbforum.entity.User.class, userId);
+    UserEntity oldUser = entityManager.find(UserEntity.class, userId);
     oldUser.setId(newUser.getId());
     oldUser.setName(newUser.getName());
     oldUser.setAddrLat(newUser.getAddrLat());
     oldUser.setAddrLong(newUser.getAddrLong());
-    oldUser.setCBusService(newUser.getCBusService());
-    oldUser.setCCatchPhrase(newUser.getCCatchPhrase());
-    oldUser.setCName(newUser.getCName());
+    oldUser.setCompanyName(newUser.getCompanyName());
+    oldUser.setCompanyCatchPhrase(newUser.getCompanyCatchPhrase());
+    oldUser.setCompanyBusService(newUser.getCompanyBusService());
     oldUser.setCity(newUser.getCity());
     oldUser.setEmail(newUser.getEmail());
     oldUser.setPhone(newUser.getPhone());
@@ -113,6 +115,13 @@ public class UserJsonPlaceHolder implements UserService {
     // entityManager.merge() -> update
     entityManager.merge(oldUser);
     return oldUser;
+  }
+
+  @Override
+  @Transactional
+  public UserEntity save(UserPostRequestDTO userRequestDTO) {
+    UserEntity userEntity = userMapper.mapEntity(userRequestDTO);
+    return userRepository.save(userEntity);
   }
 
 }

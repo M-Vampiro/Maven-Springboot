@@ -1,4 +1,4 @@
-package com.vtxlab.bootcamp.bootcampsbforum.dto.gov;
+package com.vtxlab.bootcamp.bootcampsbforum.dto.response.gov;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;

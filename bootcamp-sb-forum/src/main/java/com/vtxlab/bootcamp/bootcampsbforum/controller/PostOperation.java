@@ -7,6 +7,6 @@ import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.Post;
 public interface PostOperation {
   
   @GetMapping(value = "/posts")
-  List<Post> getPosts();
+  List<Post> getPostsFromJPH();
 
 }

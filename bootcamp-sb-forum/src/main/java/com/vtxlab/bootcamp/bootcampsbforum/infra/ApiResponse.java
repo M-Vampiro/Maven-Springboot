@@ -11,11 +11,7 @@ package com.vtxlab.bootcamp.bootcampsbforum.infra;
 
 // RedisTemplate
 
-// @Getter
-// @Builder
 public class ApiResponse<T> {
-
-  // NO getter, setter, empty constructor
 
   private String code;
 
@@ -23,10 +19,34 @@ public class ApiResponse<T> {
 
   private T data;
 
-  public ApiResponse(ApiResponseBuilder<T> builder) {
+  private ApiResponse(ApiResponseBuilder<T> builder) {
     this.code = builder.code;
     this.message = builder.message;
     this.data = builder.data;
+  }
+
+  public String getCode() {
+    return this.code;
+  }
+
+  public String getMessage() {
+    return this.message;
+  }
+
+  public T getData() {
+    return this.data;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public void setData(T data) {
+    this.data = data;
   }
 
   public static <T> ApiResponseBuilder<T> builder() { // user self-define T
@@ -40,17 +60,19 @@ public class ApiResponse<T> {
     private String message;
     private T data;
 
-    public ApiResponseBuilder<T> code(String code) { // instance method
-      this.code = code;
+    public ApiResponseBuilder<T> ok() {
+      this.code = Syscode.OK.getCode();
+      this.message = Syscode.OK.getMessage();
       return this;
     }
 
-    public ApiResponseBuilder<T> message(String message) { // instance method
-      this.message = message;
+    public ApiResponseBuilder<T> status(Syscode syscode) {
+      this.code = syscode.getCode();
+      this.message = syscode.getMessage();
       return this;
     }
 
-    public ApiResponseBuilder<T> message(T data) { // instance method
+    public ApiResponseBuilder<T> data(T data) { // instance method
       this.data = data;
       return this;
     }
@@ -58,6 +80,7 @@ public class ApiResponse<T> {
     public ApiResponse<T> build() { // instance method -> this
       return new ApiResponse<>(this);
     }
+
   }
 
 }

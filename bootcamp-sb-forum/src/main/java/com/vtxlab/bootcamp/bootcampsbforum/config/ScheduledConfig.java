@@ -3,7 +3,6 @@ package com.vtxlab.bootcamp.bootcampsbforum.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 
 @Configuration
 @EnableScheduling
@@ -21,7 +20,7 @@ public class ScheduledConfig {
     System.out.println("start: fixedDelayTask " + System.currentTimeMillis());
     Thread.sleep(1000);
     System.out.println("end: fixedDelayTask");
-  }
+  } 
 
   // @Scheduled(cron = "*/5 * * * * ?") // every 5 sec, similar to fixedDelay
   // @Scheduled(cron = "5 * * * * ?") // every 5 sec, similar to fixedDelay

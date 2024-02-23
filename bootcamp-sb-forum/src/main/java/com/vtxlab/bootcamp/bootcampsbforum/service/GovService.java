@@ -12,8 +12,8 @@ public interface GovService {
    * @param id
    * @return
    */
-  User getUser(int id);
+  User getUsersFromJPH(int id);
 
-  List<User> getUsers();
+  List<User> getUsersFromJPH();
   
 }

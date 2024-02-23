@@ -13,8 +13,7 @@ public class GlobalExceptionHandler {
   @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT) // TBC.
   public ApiResponse<Void> restClientExceptionHandler(RestClientException e) {
     return ApiResponse.<Void>builder() //
-        .code(Syscode.REST_CLIENT_EXCEPTION.getCode()) //
-        .message(Syscode.REST_CLIENT_EXCEPTION.getMessage()) //
+        .status(Syscode.REST_CLIENT_EXCEPTION) //
         .data(null) //
         .build();
   }
@@ -23,8 +22,7 @@ public class GlobalExceptionHandler {
   @ResponseStatus(value = HttpStatus.OK)
   public ApiResponse<Void> npeExceptionHandler(ResourceNotFound e) {
     return ApiResponse.<Void>builder() //
-        .code(Syscode.NOTFOUND.getCode()) //
-        .message(Syscode.NOTFOUND.getMessage()) //
+        .status(Syscode.NOTFOUND) //
         .data(null) //
         .build();
   }
@@ -33,8 +31,7 @@ public class GlobalExceptionHandler {
   @ResponseStatus(value = HttpStatus.REQUEST_TIMEOUT)
   public ApiResponse<Void> npeExceptionHandler(NullPointerException e) {
     return ApiResponse.<Void>builder() //
-        .code(Syscode.NPE_EXCEPTION.getCode()) //
-        .message(Syscode.NPE_EXCEPTION.getMessage()) //
+        .status(Syscode.NPE_EXCEPTION) //
         .data(null) //
         .build();
   }

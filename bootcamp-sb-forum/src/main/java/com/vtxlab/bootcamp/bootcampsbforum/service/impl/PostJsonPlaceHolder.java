@@ -25,7 +25,7 @@ public class PostJsonPlaceHolder implements PostService {
   private RestTemplate restTemplate;
 
   @Override
-  public List<Post> getPosts() {
+  public List<Post> getPostsFromJPH() {
     // RestTemplate restTemplate = new RestTemplate();
     String postUrl = BcUtil.url(Scheme.HTTPS, domain, postEndpoint);
 

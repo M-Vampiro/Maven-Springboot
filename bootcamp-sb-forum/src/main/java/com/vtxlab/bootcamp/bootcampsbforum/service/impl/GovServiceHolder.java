@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.vtxlab.bootcamp.bootcampsbforum.mapper.GovMapper;
+import com.vtxlab.bootcamp.bootcampsbforum.mapper.UserMapper;
 import com.vtxlab.bootcamp.bootcampsbforum.model.dto.jph.User;
 import com.vtxlab.bootcamp.bootcampsbforum.service.ForumDatabaseService;
 import com.vtxlab.bootcamp.bootcampsbforum.service.GovService;
@@ -20,16 +20,16 @@ public class GovServiceHolder implements GovService {
   private ForumDatabaseService forumDatabaseService;
 
   @Autowired
-  private GovMapper govMapper;
+  private UserMapper govMapper;
 
   @Override
-  public List<User> getUsers() {
+  public List<User> getUsersFromJPH() {
     // call JPH
-    List<User> users = userService.getUsers();
+    List<User> users = userService.getUsersFromJPH();
     // clear DB
     forumDatabaseService.deleteAllUsers();
     // save all users
-    List<com.vtxlab.bootcamp.bootcampsbforum.entity.User> userEntities =
+    List<com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity> userEntities =
         users.stream() //
             .map(e -> govMapper.mapEntity(e))//
             .collect(Collectors.toList());
@@ -39,8 +39,8 @@ public class GovServiceHolder implements GovService {
   }
 
   @Override
-  public User getUser(int id) {
-    User user = userService.getUser(id);
+  public User getUsersFromJPH(int id) {
+    User user = userService.getUserFromJPH(id);
     if (user != null) {
       // convert DTO user to Entity user
       forumDatabaseService.saveUser(govMapper.mapEntity(user));

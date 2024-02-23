@@ -7,22 +7,23 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import com.vtxlab.bootcamp.bootcampsbforum.entity.User;
+import com.vtxlab.bootcamp.bootcampsbforum.entity.UserEntity;
 
 @Repository // Bean
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
   // Query "Methods"
   // select * from users where username = ?
-  User findByUsername(String username);
+  UserEntity findByUsername(String username);
 
-  List<User> findAllByEmailAndPhoneOrderByEmailDesc(String email, String phone);
+  List<UserEntity> findAllByEmailAndPhoneOrderByEmailDesc(String email,
+      String phone);
 
-  List<User> findAllByEmailOrPhone(String email, String phone, Sort sort);
+  List<UserEntity> findAllByEmailOrPhone(String email, String phone, Sort sort);
 
   // JPQL
-  @Query("SELECT e FROM User e WHERE CAST(e.addrLat AS double) > :lat")
-  List<User> findAllByAddrLatGreaterThan(@Param("lat") Double latitude);
+  @Query("SELECT e FROM UserEntity e WHERE CAST(e.addrLat AS double) > :lat")
+  List<UserEntity> findAllByAddrLatGreaterThan(@Param("lat") Double latitude);
 
   // Native Query - problem?
   @Query(
@@ -35,7 +36,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   // JPQL
   @Modifying
-  @Query("UPDATE User u SET u.email = :newEmail WHERE u.id = :userId")
+  @Query("UPDATE UserEntity u SET u.email = :newEmail WHERE u.id = :userId")
   void updateUser(@Param("userId") Long id, @Param("newEmail") String email);
 
 }

@@ -1,11 +1,17 @@
 package com.vtxlab.bootcamp.bootcampsbforum.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,13 +22,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "Users")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Setter
-public class User implements Serializable {
+// @ToString
+public class UserEntity implements Serializable {
 
-  private static final long serialVersionUID = 3L;
+  private static final long serialVersionUID = 1L;
 
   @Id // PK
   @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-generated
@@ -41,10 +48,15 @@ public class User implements Serializable {
   @Column(name = "ADDRESS_LNG")
   private String addrLong;
   @Column(name = "COMPANY_NAME")
-  private String cName;
+  private String companyName;
   @Column(name = "COMPANY_CATCH_PHRASE")
-  private String cCatchPhrase;
+  private String companyCatchPhrase;
   @Column(name = "COMPANY_BUSINESS_SERVICE")
-  private String cBusService;
+  private String companyBusService;
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true) // serialization
+  @JsonManagedReference
+  private List<PostEntity> posts = new ArrayList<>();
+
+  
 }

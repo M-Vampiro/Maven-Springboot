@@ -1,24 +1,23 @@
 package com.vtxlab.bootcamp.bootcampsbforum.poly;
 
-public class Cat implements Flyable, Swimable {
+public class Cat implements Swimable, Flyable {
+
+  public static String a;
 
   @Override
   public void swim() {
 
   }
 
-  @Override 
+  @Override
   public void fly() {
 
   }
 
   public static void main(String[] args) {
     Cat cat = new Cat();
-
     Swimable swimableCat = cat;
     Flyable flyableCat = cat;
-
-
   }
   
 }

@@ -9,7 +9,7 @@ import com.vtxlab.bootcamp.bootcampsbforum.service.GovService;
 // private CommandLineRunner commandlineRunner;
 // main code -> if (commandlineRunner != null) commandlineRunner.run();
 
-@Component
+// @Component
 public class AppRunner implements CommandLineRunner {
 
   @Autowired

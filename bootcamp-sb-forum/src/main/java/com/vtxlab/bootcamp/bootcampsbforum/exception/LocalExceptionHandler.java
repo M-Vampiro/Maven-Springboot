@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.ApiResponse;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.GlobalExceptionHandler;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.JPHClientException;
+import com.vtxlab.bootcamp.bootcampsbforum.infra.Syscode;
 
 @RestControllerAdvice // Bean: @ContollerAdvice + @ResponseBody
 public class LocalExceptionHandler extends GlobalExceptionHandler {
@@ -16,8 +17,7 @@ public class LocalExceptionHandler extends GlobalExceptionHandler {
   // @ResponseStatus is an alternative of ResponseEntity<>
   public ApiResponse<Void> jphClientExceptionHandler(JPHClientException e) {
     return ApiResponse.<Void>builder() //
-        .code(e.getCode()) //
-        .message(e.getMessage()) //
+        .status(Syscode.JPH_NOT_AVAILABLE) //
         .data(null) //
         .build();
   }
