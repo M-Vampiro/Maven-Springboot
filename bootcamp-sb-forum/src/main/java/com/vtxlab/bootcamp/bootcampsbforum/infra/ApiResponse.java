@@ -72,12 +72,21 @@ public class ApiResponse<T> {
       return this;
     }
 
+    public ApiResponseBuilder<T> concatCustomMessage(String customMsg) {
+      if (this.code == null || this.message == null || customMsg.isBlank())
+        throw new RuntimeException();
+      this.message = this.message.concat("-").concat(customMsg);
+      return this;
+    }
+
     public ApiResponseBuilder<T> data(T data) { // instance method
       this.data = data;
       return this;
     }
 
     public ApiResponse<T> build() { // instance method -> this
+      if (this.code == null || this.message == null)
+        throw new RuntimeException();
       return new ApiResponse<>(this);
     }
 

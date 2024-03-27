@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.bootcamp.bootcampsbforum.controller.GovOperation;
+import com.vtxlab.bootcamp.bootcampsbforum.dto.request.UserIdRQDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.response.gov.PostDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.dto.response.gov.UserPostDTO;
 import com.vtxlab.bootcamp.bootcampsbforum.infra.ApiResponse;
@@ -50,22 +51,21 @@ public class GovController implements GovOperation {
         }).collect(Collectors.toList());
 
     return ApiResponse.<List<UserPostDTO>>builder() //
-        .ok()
-        .data(userPostDtos) //
+        .ok().data(userPostDtos) //
         .build();
   }
 
   @Override
-  public ApiResponse<UserPostDTO> getUsersFromJPH(int userId) {
+  public ApiResponse<UserPostDTO> getUsersFromJPH(UserIdRQDTO userdto) {
     // 1. User Service
     // 2. Post Service
     // 3. relate the user and post
     // 4. set DTO object and return
 
-    User user = govService.getUsersFromJPH(userId); // call JPH + save DB
+    User user = govService.getUsersFromJPH(Integer.valueOf(userdto.getId())); // call JPH + save DB
 
     List<PostDTO> postDTOs = postService.getPostsFromJPH().stream() //
-        .filter(e -> e.getUserId() == userId) //
+        .filter(e -> e.getUserId() == user.getId()) //
         .map(e -> {
           return PostDTO.builder() //
               .id(e.getId()) //
@@ -80,8 +80,7 @@ public class GovController implements GovOperation {
         .postDTOs(postDTOs).build();
 
     return ApiResponse.<UserPostDTO>builder() //
-        .ok()
-        .data(userPostDTO) //
+        .ok().data(userPostDTO) //
         .build();
   }
 

@@ -19,3 +19,30 @@ spring.jpa:
   show-sql: true
   hibernate.ddl-auto: update # update
   # Hibernate ddl auto (create, create-drop, validate, update)
+
+
+#這樣寫的話，原本內建的/actuator/xxx路徑，都會變成/data/xxx，可以用來防止被其他人猜到
+management.endpoints.web.base-path: /actuator
+
+# 可以這樣寫，就會開啟所有endpoints(不包含shutdown)
+management.endpoints.web.exposure.include: "*"
+
+# 如果要開啟/actuator/shutdown，要額外再加這一行
+management.endpoint.shutdown.enabled: true
+
+# exclude可以用來關閉某些endpoints
+# exclude通常會跟include一起用，就是先include了全部，然後再exclude /actuator/beans這個endpoint
+management.endpoints.web.exposure.exclude: beans
+
+# 也可以這樣寫，就只會開啟指定的endpoint，因此此處只會再額外開啟/actuator/beans和/actuator/mappings
+# web.exposure.include: beans,mappings
+
+# now we can access more details from endpoint /metrics/health/readiness
+management.endpoint.health.group.readiness.show-details: always
+
+info.application:
+  name: HelloWorld
+  description: A Demo for Spring Boot hello World!
+  author:
+    name: Vincent Lau
+    bio: Testing Bio
