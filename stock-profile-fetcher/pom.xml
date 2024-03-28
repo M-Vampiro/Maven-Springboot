@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vtxlab.bootcamp</groupId>
-	<artifactId>crypto-price-fetcher</artifactId>
+	<artifactId>stock-profile-fetcher</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>crypto-price-fetcher</name>
+	<name>stock-profile-fetcher</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
