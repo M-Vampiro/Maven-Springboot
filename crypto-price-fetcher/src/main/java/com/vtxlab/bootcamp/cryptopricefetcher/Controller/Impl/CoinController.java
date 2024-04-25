@@ -16,7 +16,7 @@ import com.vtxlab.bootcamp.cryptopricefetcher.Mapper.Mapper;
 import com.vtxlab.bootcamp.cryptopricefetcher.Service.CoinService;
 
 @RestController
-@RequestMapping(value = "crypto/coingecto/api/v1")
+@RequestMapping(value = "crypto/coingecko/api/v1")
 public class CoinController implements CoinOperation {
 
   @Autowired

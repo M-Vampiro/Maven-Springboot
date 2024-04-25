@@ -1,0 +1,12 @@
+server:
+  port: 8083
+
+api:
+  domain: "localhost:"
+  port:
+    coins: "8081"
+    stock: "8082"
+  value:
+    coins: "/crypto/coingecko/api/v1/coins"
+    stock: "/stock/finnhub/api/v1/profile2/"
+    quote: "/stock/finnhub/api/v1/quote"
